@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            World Editor
+        </title>
+        <link rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <h1>World Editor</h1>
+        <canvas id="mycanvas"></canvas>
+        <div id="control">
+            <button onclick="dispose()">🗑️</button>
+            <button onclick="save()">👌</button>
+            <!-- <button onclick="load()">🗄️</button> -->
+        </div>
+        <script src="js/math/graph.js"></script>
+        <script src="js/math/utils.js"></script>
+        <script src="js/Primitives/Point.js"></script>
+        <script src="js/Primitives/Segment.js"></script>
+        <script src="js/graphEditor.js"></script><section></section>
+        <script src="js/viewport.js"></script>
+        <script>
+           
+
+            mycanvas.width = 799;
+            mycanvas.height = 799;
+
+            const ctx = mycanvas.getContext("2d");
+
+            const p1=new Point(300,200);
+            const p2=new Point(400,200);
+            const p3=new Point(500,450);
+            const p4=new Point(160,600);
+
+            const s1 = new Segment(p1,p2);
+            const s2 = new Segment(p3,p2);
+            const s3 = new Segment(p1,p4);
+            const s4 = new Segment(p4,p2);
+            
+            
+            const graph = new Graph([p1,p2,p3,p4],[s1,s2,s3]);
+            const viewport = new ViewPort(mycanvas); //returns a zoom value now
+            const graphEditor = new GraphEditor(viewport,graph);
+
+            animate();
+
+            function dispose(){
+                graphEditor.dispose();
+            }
+            function save(){
+                localStorage.setItem("graph", JSON.stringify(graph));
+            }
+
+
+            // function load(){
+            //     const graph = JSON.parse(localStorage.getItem("graph"));
+            //     graphEditor.load(graph);
+            // }
+            function animate(){
+                viewport.restore();
+                graphEditor.display();
+               
+                requestAnimationFrame(animate);
+            }
+            // graph.draw(ctx)
+        </script>
+    </body>
+</html>

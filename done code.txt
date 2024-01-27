@@ -1,0 +1,53 @@
+ function addRandomPoint(){
+                const success = graph.tryAddPoint(
+                    new Point(
+                        Math.random()*mycanvas.width,
+                        Math.random()*mycanvas.height
+                    )
+                );
+                ctx.clearRect(0,0,mycanvas.width,mycanvas.height);
+                graph.draw(ctx);
+                console.log(success);
+            }
+
+            function removeRandomPoint(){
+                if (graph.points.length == 0 ){
+                    console.log("no points")
+                    return ;
+                }
+                const ind = Math.floor(Math.random() *graph.points.length);
+                graph.removePoint(graph.points[ind]);
+                ctx.clearRect(0,0,mycanvas.width,mycanvas.height);
+                graph.draw(ctx);
+            }
+
+            function removeRandomSegment(){
+                if (graph.segments.length == 0 ){
+                    console.log("no segments")
+                    return ;
+                }
+                const ind = Math.floor(Math.random() *graph.segments.length);
+                graph.removeSegment(graph.segments[ind]);
+                ctx.clearRect(0,0,mycanvas.width,mycanvas.height);
+                graph.draw(ctx);
+            }
+
+            function addRandomSegment(){
+                const i1 = Math.floor(Math.random() *graph.points.length )
+                const i2 = Math.floor(Math.random() *graph.points.length )
+                const success = graph.tryAddSegment(
+                        new Segment(
+                            graph.points[i1],graph.points[i2]
+                        )
+                    );
+                ctx.clearRect(0,0,mycanvas.width,mycanvas.height);
+                graph.draw(ctx);
+                console.log(success)
+            }
+
+            function clearWorld()
+            {
+                graph.dispose();
+                ctx.clearRect(0,0,mycanvas.width,mycanvas.height);
+                graph.draw(ctx);
+            }

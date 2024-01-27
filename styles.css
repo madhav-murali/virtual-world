@@ -1,0 +1,13 @@
+body{
+    background-color: black;
+    text-align: center;
+}
+
+h1{
+    color: wheat;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#mycanvas{
+    background-color: rgb(19, 166, 63);
+}
