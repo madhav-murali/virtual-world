@@ -1,2 +1,0 @@
-# virtual-world
-hello
